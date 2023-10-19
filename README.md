@@ -1,9 +1,9 @@
-Title: Golang Proof of Work Blockchain
+# Golang Proof of Work Blockchain
 
-Description:
+## Description
 The Golang Proof of Work Blockchain project is an innovative and open-source blockchain implementation built from the ground up in the Go programming language. This project is designed to provide a comprehensive understanding of blockchain technology, specifically focusing on the Proof of Work (PoW) consensus mechanism, which underpins many popular cryptocurrencies like Bitcoin.
 
-Key Features:
+**Key Features:**
 1. *Blockchain Core:* The project features a robust and efficient blockchain core, complete with data structures for blocks, transactions, and a tamper-resistant ledger.
 
 2. *Consensus Mechanism:* It implements the PoW consensus mechanism, where miners compete to solve complex cryptographic puzzles to add new blocks to the blockchain. This mechanism ensures the security and immutability of the ledger.
