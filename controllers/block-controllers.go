@@ -20,6 +20,10 @@ var Blockchain []model.Block
 
 var difficulty = 1
 
+type Message struct {
+	Data int
+}
+
 var mutex = &sync.Mutex{}
 
 func Blockinitalizer() {
@@ -58,6 +62,26 @@ func HandleGetBlockchain(res http.ResponseWriter, req *http.Request) {
 	io.WriteString(res, string(bytes))
 }
 
-func HandleWriteBlock(res http.ResponseWriter, req *http.Request) {
+func HandleWriteBlock(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var m Message
+
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&m); err != nil {
+		respondWithJSON(w, r, http.StatusBadRequest, r.Body)
+		return
+	}
+	defer r.Body.Close()
+
+	mutex.Lock()
+	newBlock := generateBlock(Blockchain[len(Blockchain)-1], m.Data)
+	mutex.Unlock()
+
+	if isBlockValid(newBlock, Blockchain[len(Blockchain)-1]) {
+		Blockchain = append(Blockchain, newBlock)
+		spew.Dump(Blockchain)
+	}
+
+	respondWithJSON(w, r, http.StatusCreated, newBlock)
 
 }
