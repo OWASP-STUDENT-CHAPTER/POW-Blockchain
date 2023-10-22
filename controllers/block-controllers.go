@@ -1,9 +1,12 @@
 package controllers
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"io"
 	"net/http"
+	"strconv"
 	"sync"
 	"time"
 
@@ -38,8 +41,12 @@ func Blockinitalizer() {
 	mutex.Unlock()
 }
 
-func calculateHash(b model.Block) string {
-	return "hello"
+func calculateHash(block model.Block) string {
+	record := strconv.Itoa(block.Index) + block.Timestamp + strconv.Itoa(block.Data) + block.PrevHash + block.Nonce
+	h := sha256.New()
+	h.Write([]byte(record))
+	hashed := h.Sum(nil)
+	return hex.EncodeToString(hashed)
 }
 
 func HandleGetBlockchain(res http.ResponseWriter, req *http.Request) {
