@@ -8,9 +8,14 @@ import (
 	"os"
 	"time"
 
+	"github.com/KulwinderSingh07/POW-Blockchain/model"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
+
+var NewBlock model.Block
+
+var Blockchain []model.Block
 
 func main() {
 	err := godotenv.Load()
