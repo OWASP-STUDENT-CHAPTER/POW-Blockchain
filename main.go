@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/KulwinderSingh07/POW-Blockchain/controllers"
 	"github.com/KulwinderSingh07/POW-Blockchain/model"
 	"github.com/KulwinderSingh07/POW-Blockchain/routes"
 	"github.com/joho/godotenv"
@@ -20,6 +21,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	controllers.Blockinitalizer()
 	log.Fatal(run())
 }
 
